@@ -12,7 +12,7 @@ class Feature_extraction:
         test (str): The test data
         matrix (list): List to store values
     """
-    def __init__(self, train, test):
+    def __init__(self, test, train=None):
         self.train = train
         self.test = test
         self.matrix = []
@@ -54,14 +54,6 @@ class Feature_extraction:
         group.reset_index( inplace = True)
         self.matrix = pd.merge( self.matrix, group, on = cols, how = "left" )
         self.matrix["item_cnt_month"] = self.matrix["item_cnt_month"].fillna(0).astype(np.float16)
-    
-    def reduce_test_memory(self):
-        """
-        The method to reduce memory usage of the test data.
-        """
-        self.test["date_block_num"] = self.test["date_block_num"].astype(np.int8)
-        self.test["shop_id"] = self.test.shop_id.astype(np.int8)
-        self.test["item_id"] = self.test.item_id.astype(np.int16)
     
     def concatenate_to_mx(self, cols):
         """
@@ -259,7 +251,35 @@ class Feature_extraction:
         end_mem = self.matrix.memory_usage().sum() / 1024**2
         print('Memory usage after optimization is: {:.2f} MB'.format(end_mem))
         print('Decreased by {:.1f}%'.format(100 * (start_mem - end_mem) / start_mem))
-            
+
+    def operate_data_pipeline(self):
+        #to drop ITEM PRICE - END
+        #        IS_TRAIN - END
+        #TRY drop city_code_x, shop_type_code_x, item_category_id_x, item_name_group_x
+        self.preprocess()
+        self.add_revenue(cols=["date_block_num", "shop_id", "item_id"])
+        self.reduce_test_memory()
+        self.reduce_memory_usage()
+        self.concatenate_to_mx(cols=["date_block_num", "shop_id", "item_id"])
+        self.lag_feature([1,2,3,6,12], ["item_cnt_month"])
+        self.sort_data('date_block_num')
+        self.add_shop_age()
+        self.add_avg_sales()
+        self.add_global_item_age()
+        self.sort_data('date_block_num')
+        self.reduce_memory_usage()
+        print('additional features')
+        shops=pd.read_csv("/home/siarhei/Programming/ML/Data/Predict Future Sales/shops.csv")
+        self.add_city_codes(shops = shops)
+        self.add_shop_type(shops = shops)
+        self.reduce_memory_usage()
+        del shops
+        items=pd.read_csv("/home/siarhei/Programming/ML/Data/Predict Future Sales/items.csv")
+        self.add_cats(items=items)
+        self.add_item_name_groups(items=items, sim_thresh=70)
+        self.reduce_memory_usage()
+        self.matrix = self.matrix.drop_duplicates()
+        
             
     def sort_data(self, column_name):
         self.matrix.sort_values(by=column_name, inplace=True)
@@ -273,5 +293,11 @@ class Feature_extraction:
     #CatBoostR : ['date_block_num', 'average_prev_sales', 'item_name_group_x','item_price'
     # 'is_train', 'city_code_x', 'shop_type_code_x', 'item_category_id_x', 'platform_id'
     # 'supercategory_id']
-    def drop_columns(self, columns):
-        self.matrix.drop(columns=columns, inplace = True)
+    def drop_columns(self):
+        # List of columns to drop
+        cols_to_drop = ['item_price', 'is_train', 'city_code_x', 'shop_type_code_x', 'item_category_id_x', 'item_name_group_x']
+
+        # Check if each column exists and drop it if it does
+        for col in cols_to_drop:
+            if col in self.matrix.columns:
+                self.matrix = self.matrix.drop(col, axis=1)
