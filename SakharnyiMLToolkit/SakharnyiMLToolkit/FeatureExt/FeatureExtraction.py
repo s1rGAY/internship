@@ -252,16 +252,15 @@ class Feature_extraction:
         print('Memory usage after optimization is: {:.2f} MB'.format(end_mem))
         print('Decreased by {:.1f}%'.format(100 * (start_mem - end_mem) / start_mem))
 
-    def operate_data_pipeline(self):
+    def operate_data_pipeline(self, lags_list, path_to_shops, path_to_items):
         #to drop ITEM PRICE - END
         #        IS_TRAIN - END
         #TRY drop city_code_x, shop_type_code_x, item_category_id_x, item_name_group_x
         self.preprocess()
         self.add_revenue(cols=["date_block_num", "shop_id", "item_id"])
-        self.reduce_test_memory()
         self.reduce_memory_usage()
         self.concatenate_to_mx(cols=["date_block_num", "shop_id", "item_id"])
-        self.lag_feature([1,2,3,6,12], ["item_cnt_month"])
+        self.lag_feature(lags_list, ["item_cnt_month"])
         self.sort_data('date_block_num')
         self.add_shop_age()
         self.add_avg_sales()
