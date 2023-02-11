@@ -1,0 +1,5 @@
+siarhei@siarhei-linux:~/Programming/ML/internship/DS-4.2$ dvc remote list
+drive   /home/siarhei/Programming/ML/internship/DS-4.2/.dvc/../gdrive:AIzaSyBuPffS04Om5FV9a65pDecJv3ymCCEeDco
+gdrive  /home/siarhei/Programming/ML/internship/DS-4.2/.dvc/../AIzaSyBuPffS04Om5FV9a65pDecJv3ymCCEeDco
+myremote        gdrive://0AIac4JZqHhKmUk9PDA/dvcstore
+gdrive_repo     gdrive://1bzS_ieHzgYgAoQczEBveeBDyrLw_yVN0
