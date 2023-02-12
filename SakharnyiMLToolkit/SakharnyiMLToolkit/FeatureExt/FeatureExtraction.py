@@ -65,7 +65,7 @@ class Feature_extraction:
         Returns:
         None
         """
-        self.matrix = pd.concat([self.matrix, self.test.drop(["ID"],axis = 1)], ignore_index=True, sort=False, keys=cols)
+        self.matrix = pd.concat([self.matrix, self.test], ignore_index=True, sort=False, keys=cols)
         self.matrix.fillna( 0, inplace = True )
     
     def lag_feature(self,lags, cols):
