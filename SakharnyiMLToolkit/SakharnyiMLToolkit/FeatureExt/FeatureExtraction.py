@@ -236,7 +236,7 @@ class Feature_extraction:
                     if c_min > np.iinfo(np.int8).min and c_max < np.iinfo(np.int8).max:
                         self.matrix[col] = self.matrix[col].astype(np.int8)
                     elif c_min > np.iinfo(np.int16).min and c_max < np.iinfo(np.int16).max:
-                        self.matrix[col] = self.matrixf[col].astype(np.int16)
+                        self.matrix[col] = self.matrix[col].astype(np.int16)
                     elif c_min > np.iinfo(np.int32).min and c_max < np.iinfo(np.int32).max:
                         self.matrix[col] = self.matrix[col].astype(np.int32)
                     elif c_min > np.iinfo(np.int64).min and c_max < np.iinfo(np.int64).max:
