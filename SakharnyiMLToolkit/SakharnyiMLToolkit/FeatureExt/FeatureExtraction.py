@@ -255,10 +255,9 @@ class Feature_extraction:
     def operate_data_pipeline(self, lags_list, path_to_shops, path_to_items):
         self.preprocess()
         self.add_revenue(cols=["date_block_num", "shop_id", "item_id"])
-        self.reduce_test_memory()
         self.reduce_memory_usage()
         self.concatenate_to_mx(cols=["date_block_num", "shop_id", "item_id"])
-        self.lag_feature([1,2,3,6,12], ["item_cnt_month"])
+        self.lag_feature(lags_list, ["item_cnt_month"])
         self.sort_data('date_block_num')
         self.add_shop_age()
         self.add_global_item_age()
