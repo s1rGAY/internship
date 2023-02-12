@@ -253,9 +253,6 @@ class Feature_extraction:
         print('Decreased by {:.1f}%'.format(100 * (start_mem - end_mem) / start_mem))
 
     def operate_data_pipeline(self, lags_list, path_to_shops, path_to_items):
-        #to drop ITEM PRICE - END
-        #        IS_TRAIN - END
-        #TRY drop city_code_x, shop_type_code_x, item_category_id_x, item_name_group_x
         self.preprocess()
         self.add_revenue(cols=["date_block_num", "shop_id", "item_id"])
         self.reduce_memory_usage()
@@ -275,25 +272,19 @@ class Feature_extraction:
         self.add_item_name_groups(items=items, sim_thresh=70)
         self.reduce_memory_usage()
         self.matrix = self.matrix.drop_duplicates()
+        self.drop_columns()
         
-            
     def sort_data(self, column_name):
         self.matrix.sort_values(by=column_name, inplace=True)
     
     def get_data(self):
         return self.matrix
 
-    #XGBR : ['date_block_num', 'item_name_groups', 'item_price', 'average_prev_sales',
-    # 'is_train', 'city_code_x', 'shop_type_code_x','item_category_id_x','platform_id',
-    # 'supercategory_id']
-    #CatBoostR : ['date_block_num', 'average_prev_sales', 'item_name_group_x','item_price'
-    # 'is_train', 'city_code_x', 'shop_type_code_x', 'item_category_id_x', 'platform_id'
-    # 'supercategory_id']
     def drop_columns(self):
-        # List of columns to drop
-        cols_to_drop = ['item_price', 'is_train', 'city_code_x', 'shop_type_code_x', 'item_category_id_x', 'item_name_group_x']
+        cols_to_drop = ['item_price', 'is_train', 'city_code_x', 'shop_type_code_x', \
+            'item_category_id_x', 'item_name_group_x', 'item_cnt_month','date', 'item_cnt_day',\
+            'platform_id','supercategory_id']
 
-        # Check if each column exists and drop it if it does
         for col in cols_to_drop:
             if col in self.matrix.columns:
                 self.matrix = self.matrix.drop(col, axis=1)
