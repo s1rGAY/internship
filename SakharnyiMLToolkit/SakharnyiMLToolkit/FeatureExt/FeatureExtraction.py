@@ -272,7 +272,6 @@ class Feature_extraction:
         self.reduce_memory_usage()
         del shops
         items=pd.read_csv(path_to_items)
-        self.add_cats(items=items)
         self.add_item_name_groups(items=items, sim_thresh=70)
         self.reduce_memory_usage()
         self.matrix = self.matrix.drop_duplicates()
