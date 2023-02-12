@@ -282,7 +282,7 @@ class Feature_extraction:
 
     def drop_columns(self):
         cols_to_drop = ['item_price', 'is_train', 'city_code_x', 'shop_type_code_x', \
-            'item_category_id_x', 'item_name_group_x', 'item_cnt_month','date', 'item_cnt_day',\
+            'item_category_id_x', 'item_name_group_x', ,'date', 'item_cnt_day',\
             'platform_id','supercategory_id']
 
         for col in cols_to_drop:
