@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='SakharnyiMLToolkit',
-    version='0.25',
+    version='0.26',
     author='Siarhei Sakharnyi',
     description='Combined package for feature extraction, hyperparameter tuning, and validation schema',
     long_description='A package that provides combined solutions for feature extraction, hyperparameter tuning, and validation schema, with a focus on making the process more efficient and easier.',
