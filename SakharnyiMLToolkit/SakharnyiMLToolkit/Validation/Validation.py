@@ -1,5 +1,3 @@
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
 class ModelValidator:
     def __init__(self, model, test_y, avoid_model = True, test_x = None, predicted_y = None):
         self.model = model
@@ -22,6 +20,7 @@ class ModelValidator:
         return self.model
 
     def get_model_results(self):
+        from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
         if self.avoid_model==True:
             mse = mean_squared_error(self.test_y, self.predicted_y)
             rmse = pow(mse,0.5)
