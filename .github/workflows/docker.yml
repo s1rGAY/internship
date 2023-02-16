@@ -1,7 +1,8 @@
 name: Build and push Docker image
 on:
   push:
-    branches: [ DS-4.2 ]
+    branches:
+      - DS-4.2
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
