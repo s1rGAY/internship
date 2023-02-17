@@ -12,7 +12,7 @@ from SakharnyiMLToolkit import Model_val
 #configuration
 import configparser
 config = configparser.ConfigParser()
-config.read('/home/siarhei/Programming/ML/internship/DS-4.2/dags/config.ini')
+config.read('config.ini')
 
 #path
 path_to_workspace = config.get('path_env', 'path_to_workspace')
