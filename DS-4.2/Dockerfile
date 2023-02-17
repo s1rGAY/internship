@@ -11,4 +11,3 @@ COPY . .
 COPY dags/config.ini /app/config.ini
 
 CMD [ "python", "./dags/pipepline_dag.py" ]
-
