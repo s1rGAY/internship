@@ -1,0 +1,142 @@
+[CV - 1] Task Proposal
+
+Preliminary
+This project aims to develop a computer vision system that can detect and classify various objects in real-time video footage. The system should be able to process video streams from multiple cameras(optional) and identify objects of interest with ~high accuracy and ~minimal latency. The goal of this project is to create a system that can be deployed in various industries, such as security, retail, and manufacturing, to improve safety, efficiency, and productivity.
+
+CV Project description
+Business problem
+Many industries require real-time monitoring and analysis of video streams to ensure safety, prevent theft or damage, and optimize operations. However, manually monitoring and analyzing video footage can be time-consuming and prone to errors. A computer vision system that can automatically detect and classify objects in video footage can significantly improve efficiency and accuracy.
+
+What's your goal:
+Develop a computer vision system that can detect and classify objects in real-time video footage.
+Create a scalable and efficient system that can process video streams from multiple cameras simultaneously.(optional)
+Achieve ~high accuracy and ~low latency in object detection and classification.
+Related skills:
+Computer Vision
+Deep Learning
+Python Programming
+TensorFlow, Keras, or PyTorch (Write down the full technology stack)
+Video Processing
+
+
+[CV - 2] Data Preparation
+
+1. Collect (and annotate) a large dataset of video footage with a variety of objects, lighting conditions, and camera angles.
+	1.1 Identify the objects of interest and decide on the number of classes to be detected.
+	1.2 Collect video footage from various sources, such as public datasets, surveillance cameras, or webcams.
+	1.3 Annotate the video data using a labeling tool, such as LabelImg or VGG Image Annotator, to create bounding boxes around the objects of interest and assign class labels.
+	1.4 Ensure that the dataset is diverse enough to include various object sizes, orientations, and backgrounds.
+
+Resources:
+- YouTube-BoundingBoxes: https://research.google.com/youtube-bb/
+- LabelImg labeling tool: https://github.com/tzutalin/labelImg
+- RectLabel: https://rectlabel.com
+- VGG Image Annotator (VIA) labeling tool: http://www.robots.ox.ac.uk/~vgg/software/via/via-1.0.6.html
+- Open Images Dataset V6: https://storage.googleapis.com/openimages/web/index.html
+- COCO dataset: http://cocodataset.org/
+- ImageNet dataset: http://www.image-net.org/
+- OpenCV library for video processing: https://opencv.org/
+
+2. Preprocess the video data to extract individual frames and resize them to a uniform size.
+	2.1 Extract individual frames from the video data using a video processing library, such as OpenCV or FFmpeg.
+	2.2 Resize the frames to a uniform size to ensure that all frames have the same dimensions and can be processed efficiently by the deep learning model.
+	2.3 Convert the frames to a suitable format for deep learning, such as JPEG or PNG.
+	
+Resources:
+- FFmpeg video processing tool: https://www.ffmpeg.org/
+- Pillow library for image processing: https://pillow.readthedocs.io/en/stable/
+
+3. Augment the dataset to increase the variety of objects and backgrounds and improve the robustness of the model.
+	3.1 Apply various data augmentation techniques to the dataset, such as random cropping, rotation, and flipping, to increase the variety of objects and backgrounds and improve the generalization of the model.
+	3.2 Ensure that the augmented data is realistic and relevant to the application domain.
+	
+Resources:
+- TensorFlow ImageDataGenerator: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator
+- PyTorch torchvision: https://pytorch.org/vision/stable/transforms.html
+- Imgaug: https://github.com/aleju/imgaug
+
+4. Split the dataset into training, validation, and testing sets.
+	4.1 Divide the dataset into three parts: training set, validation set, and testing set.
+	4.2 Ensure that each set contains a representative sample of the classes and that the distribution of the classes is balanced across the sets.
+	4.3 Use the training set to train the deep learning model, the validation set to tune the hyperparameters and monitor the performance, and the testing set to evaluate the final performance of the model.
+
+Resources:
+- Keras ImageDataGenerator flow_from_directory method: https://keras.io/api/preprocessing/image/
+- PyTorch DataLoader : https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
+
+
+[CV - 3] Model Development
+*read the whole task to form your path
+
+1. Design and develop a deep learning model for object detection and classification, such as YOLO, SSD, VGG, ResNet, Inception,  or Faster R-CNN.
+
+Resources:
+- YOLO (You Only Look Once) algorithm: https://pjreddie.com/darknet/yolo/
+- SSD (Single Shot MultiBox Detector) algorithm: https://arxiv.org/abs/1512.02325
+- Faster R-CNN (Region-based Convolutional Neural Network) algorithm: https://arxiv.org/abs/1506.01497
+- TensorFlow, Keras, or PyTorch frameworks for deep learning: https://www.tensorflow.org/, https://keras.io/, https://pytorch.org/
+- ALSO CHECK: https://www.diva-portal.org/smash/get/diva2:1421305/FULLTEXT01.pdf
+
+2. Fine-tune the pre-trained model on the annotated dataset using transfer learning.
+
+Resources:
+- Transfer learning tutorial in TensorFlow: https://www.tensorflow.org/tutorials/images/transfer_learning
+- Fine-tuning pre-trained models in PyTorch: https://pytorch.org/tutorials/beginner/finetuning_torchvision_models_tutorial.html
+
+3. Optimize the model for speed and accuracy by adjusting hyperparameters, experimenting with different architectures, and using model compression techniques.
+
+Resourses:
+- TensorFlow's Keras Tuner: https://keras-team.github.io/keras-tuner
+- AutoKeras: https://autokeras.com
+- TensorFlow Model Optimization: https://www.tensorflow.org/model_optimization
+- PyTorch Model Compression: https://pytorch.org/tutorials/intermediate/pruning_tutorial.html
+- DeepSpeed: https://www.deepspeed.ai
+- ONNX Runtime: https://www.onnxruntime.ai
+- NVIDIA TensorRT: https://developer.nvidia.com/tensorrt
+
+4. Evaluate the performance of the model on the validation and testing sets.
+
+
+[CV - 4] Deployment
+
+4.1 Integrate the model with a video processing pipeline that can handle real-time video streams from multiple cameras.
+4.2 Deploy the system on a scalable and efficient architecture, such as a distributed system or a cloud-based platform.
+4.3 Implement a user interface for the system that allows users to view the video streams and monitor the detected objects.
+
+Resourses:
+- Flask: https://flask.palletsprojects.com/en/2.2.x
+- Streamlit: https://docs.streamlit.io
+
+
+[CV - 5] Testing and Evaluation
+
+1. Test the system on real-world video footage and evaluate its accuracy, speed, and robustness.
+2. Identify potential failure modes and develop strategies to mitigate them.
+
+Resources:
+- UCF101 Action Recognition Dataset: https://www.crcv.ucf.edu/data/UCF101.php
+- KITTI Vision Benchmark Suite: http://www.cvlibs.net/datasets/kitti/
+
+
+[CV - 6] Maintenance and Improvement
+
+- Monitor the system performance and detect any issues or errors.
+- Maintain the system by updating dependencies, fixing bugs, and optimizing performance.
+- Continuously improve the system by incorporating new techniques and algorithms.
+
+Resources:
+
+- Books on computer vision and deep learning, such as : 
+	1. "Deep Learning" by Goodfellow, Bengio, and Courville
+	2. "Hands-On Computer Vision with TensorFlow 2" by R. Hnatiuk
+	3. "Python Machine Learning" by S. Raschka 
+	4. "Computer Vision: Algorithms and Applications" by Richard Szeliski
+	4. "Deep Learning for Computer Vision with Python" - https://www.pyimagesearch.com/deep-learning-computer-vision-python-book
+	5. "Concise Computer Vision: An Introduction into Theory and Algorithms" by Reinhard Klette
+
+
+
+
+
+
+
